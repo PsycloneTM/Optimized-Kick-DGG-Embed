@@ -23,16 +23,13 @@
 
     if (isKickEmbed) {
         GM.addStyle(`
-            /* Hide UI elements - grouped for better performance */
             #nav-main,#sidebar,aside,.main-header,#channel-content,#channel-chatroom,
             .z-controls.absolute.right-7.top-7,
             button[data-testid="video-player-clip"],
             button[data-testid="video-player-theatre-mode"]{display:none!important}
 
-            /* Main content wrapper optimization */
             main,.flex-grow,.flex-col{background:#000!important;padding:0!important;margin:0!important}
 
-            /* Force full-screen player with GPU acceleration */
             #injected-channel-player,#injected-embedded-channel-player-video{
                 position:fixed!important;top:0!important;left:0!important;
                 width:100vw!important;height:100vh!important;
@@ -40,19 +37,16 @@
                 transform:translateZ(0);will-change:transform
             }
 
-            /* Video optimization with GPU acceleration */
             video#video-player{
                 width:100%!important;height:100%!important;
                 transform:translateZ(0);will-change:transform
             }
 
-            /* Control bar */
             .z-controls.bottom-0{
                 display:flex!important;opacity:1!important;
                 z-index:100000!important;pointer-events:auto!important
             }
 
-            /* Hide scrollbars */
             html,body{overflow:hidden!important;background:#000!important;margin:0!important;padding:0!important}
         `);
     }
@@ -304,7 +298,7 @@
         let lastResize = 0;
         const resizeInterval = setInterval(() => {
             const now = Date.now();
-            if (now - lastResize < 2000) return; // Increased from 900ms to reduce conflicts
+            if (now - lastResize < 900) return;
             lastResize = now;
 
             const player = document.getElementById('injected-channel-player');
